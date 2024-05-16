@@ -1,0 +1,30 @@
+CREATE TABLE anxiety (
+    email VARCHAR(100),
+    fullname VARCHAR(100),
+    phq FLOAT,
+    gad FLOAT,
+    epworth FLOAT,
+    output_text TEXT,
+    date DATETIME
+);
+
+
+
+
+
+CREATE TABLE patientdetails (
+    fullname VARCHAR(255),
+    email VARCHAR(255) PRIMARY KEY,
+    gender ENUM('Male', 'Female', 'Other'),
+    dob DATE,
+    password VARCHAR(255)
+);
+
+
+CREATE TABLE suicidetext (
+    email VARCHAR(255),
+    fullname VARCHAR(100),
+    input_text TEXT,
+    output_number VARCHAR(100),
+    date DATETIME
+);

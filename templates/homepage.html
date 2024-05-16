@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background-color: rgb(213, 211, 219);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 5px;
+      height: 100vh;
+      /* overflow: hidden; */
+      justify-content: center;
+      align-items: center;
+      background: url('../static/home1.jpg') center/cover no-repeat fixed;
+    }
+
+
+    nav {
+      background: #d7cfcf;
+      width: 100%;
+      padding: 10px 10%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .userpic {
+      width: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-left: 30px;
+    }
+
+    nav ul {
+      width: 100%;
+      text-align: right;
+    }
+
+    nav ul li {
+      display: inline-block;
+      list-style: none;
+      margin: 10px 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .sub-menu-wrap {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 10%;
+      width: 320px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s, visibility 0.5s;
+      border-radius: 15%;
+      background: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      border: 1px solid #ccc;
+      visibility: hidden;
+    }
+
+    .sub-menu-wrap.open-menu {
+      max-height: 400px;
+      visibility: visible;
+    }
+
+    .sub-menu {
+      padding: 20px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-info h3 {
+      font-weight: 500;
+    }
+
+    .user-info img {
+      width: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .sub-menu hr {
+      border: 0;
+      height: 2px;
+      width: 100%;
+      background: #342e2e;
+      margin: 15px 0 10px;
+    }
+
+    .sub-menu-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #525252;
+      margin: 12px 0;
+    }
+
+    .sub-menu-link img {
+      width: 30px;
+      border-radius: 50%;
+      background: #e5e5e5;
+      padding: 8px;
+      margin-right: 15px;
+    }
+
+    .sub-menu-link p {
+      width: 100%;
+    }
+
+    .sub-menu-link span {
+      font-size: 22px;
+      transition: transform 0.5s;
+    }
+
+    .sub-menu-link:hover span {
+      transform: translateX(5px);
+    }
+
+    .sub-menu-link:hover p {
+      font-weight: 600;
+    }
+
+    .bold-link {
+      font-weight: bold;
+    }
+
+
+
+    textarea {
+      width: 100%;
+      height: 300px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      max-width: 200px;
+      /* Set a maximum width for the cells */
+      overflow-wrap: break-word;
+      /* This property ensures text wraps within the cell */
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .parent-container {
+      text-align: center;
+      /* Center child inline-block elements horizontally */
+
+      display: flex;
+      justify-content: center;
+      /* Center child elements horizontally */
+      align-items: center;
+      /* Center child elements vertically */
+    }
+
+    .inline-block-element {
+      display: inline-block;
+      /* Ensure the element is inline-block */
+     
+      /* Add margin if needed */
+    }
+  </style>
+
+
+  <title>Mental Insight</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <nav>
+
+    <span>
+      <b>
+        {{ data[0][0] }}'s Dashboard
+      </b>
+    </span>
+
+
+
+    <ul>
+      <li><a href="/Anxiety" class="bold-link">Anxiety</a></li>
+      <li><a href="/documentation" class="bold-link">Documentation</a></li>
+
+    </ul>
+    <img src="./static/logo.png" alt="profile_logo" class="userpic" onclick="toggleMenu()">
+
+
+    <div class="sub-menu-wrap" id="subMenu">
+      <div class="sub-menu">
+        <div class="user-info">
+          <img src="./static/user.png" alt="user photo">
+          <h3>{{ session['username'] }}</h3>
+        </div>
+        <hr>
+        <a href="#" class="sub-menu-link">
+          <img src="./static/help.png">
+          <p>Help & support</p>
+          <span>></span>
+        </a>
+        <a href="{{ url_for('logout') }}" class="sub-menu-link">
+          <img src="./static/logout.png">
+          <p>Log Out</p>
+          <span>></span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+  <center>
+
+    <h2>Mental Health Prediction</h2>
+
+    </center>
+    <table>
+      <tr>
+        <td>
+          <div class="parent-container">
+            <div class="inline-block-element">
+              <form id="predictionForm" action="/predict" method="POST">
+                <textarea id="predictionInput" name="input_text" rows="4" cols="50"></textarea>
+                <br>
+                <button type="submit" name="prediction_type" value="basic">Basic Predict</button>
+                <button type="submit" name="prediction_type" value="advance">Advance Prediction</button>
+              </form>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="parent-container">
+            <div class="inline-block-element">
+              {% if data[1]|length !=0 %}
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>PHQ</th>
+                    <th>GAD</th>
+                    <th>Epworth</th>
+                    <th>Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for result in data[1] %}
+                  <tr>
+                    <td><b>{{ result[3] }}</b></td>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[1] }}</td>
+                    <td>{{ result[2] }}</td>
+                    <td>{{ result[4] }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+
+
+              {% endif %}
+
+
+              {% if data[2]|length !=0 %}
+              <!-- Table for data[1] -->
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Input</th>
+                    <th>Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for result in data[2] %}
+                  <tr>
+                    <td><b>{{ result[1] }}</b></td>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[2] }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+              {% endif %}
+
+            </div>
+          </div>
+
+
+        </td>
+
+      </tr>
+    </table>
+
+
+
+
+
+
+  <script>
+    let subMenu = document.getElementById("subMenu");
+    let userpic = document.querySelector(".userpic");
+
+    function toggleMenu() {
+      subMenu.classList.toggle("open-menu");
+    }
+
+    // Close the sub-menu wrap when clicking anywhere outside of it
+    document.body.addEventListener("click", function (event) {
+      if (!subMenu.contains(event.target) && event.target !== userpic) {
+        subMenu.classList.remove("open-menu");
+      }
+    });
+  </script>
+
+</body>
+
+</html>

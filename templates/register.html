@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #b7dfff;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .mycss {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .onborder {
+            border: 3px solid rgb(0, 0, 0);
+            box-shadow: 0 0 100px rgba(88, 43, 248, 0.8);
+            margin: 10px;
+            display: inline-block;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Registration Container -->
+    <div class="container onborder">
+        <h2>Register</h2>
+        <form id="loginForm" action="{{ url_for('registeruser') }}" method="post">
+            <input class="mycss" "text" placeholder="Full Name" name="fullname" required>
+            <input type="text" class="mycss"  placeholder="Email" name="email" required>
+
+                <label for="gender">Gender :</label>
+                <input type="radio" name="gender" value="male" required> Male 
+        
+                <input type="radio" name="gender" value="female" required> Female 
+           
+                <input type="radio" name="gender" value="other" required> Other
+            
+            
+            
+            <input type="date"  class="mycss" placeholder="Date of Birth" name="dob" required>
+
+            <input type="password" class="mycss" placeholder="Password" name="password" required>
+            <div class="g-recaptcha" data-sitekey="6Lf4uT4pAAAAAA4owMrBjtimTVb1n5rC33zVsP-B"></div>
+
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="/">Login</a></p>
+    </div>
+
+    
+<script>
+        $(document).ready(function () {
+            // Your form submission logic
+            $('#loginForm').submit(function (event) {
+                event.preventDefault();
+
+                // Perform AJAX request to registeruser endpoint
+                $.ajax({
+                    type: 'POST',
+                    url: '/registeruser',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert(response.message); // Display the registration message
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+
+
+
+</script>
+
+</body>
+
+</html>
