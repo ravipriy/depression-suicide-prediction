@@ -1,0 +1,8 @@
+torch
+transformers
+datasets
+pandas
+scikit-learn
+flask
+mysql-connector-python
+ipython
