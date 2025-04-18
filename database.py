@@ -4,7 +4,7 @@ mysql_config = {
     'host': 'localhost', 
     'user': 'root',
     'password': 'admin',
-    'database': 'amanProject', 
+    'database': 'myDB', 
 }
 
 def conn():
